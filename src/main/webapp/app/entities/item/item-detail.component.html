@@ -1,0 +1,32 @@
+
+<div *ngIf="item">
+    <h2><span jhiTranslate="shopApp.item.detail.title">Item</span> {{item.id}}</h2>
+    <hr>
+    <mst-alert-error></mst-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="shopApp.item.quantity" [ngbTooltip]="'shopApp.item.help.quantity' | translate">Quantity</span></dt>
+        <dd>
+            <span>{{item.quantity}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.item.cart">Cart</span></dt>
+        <dd>
+            <div *ngIf="item.cart">
+                <a [routerLink]="['/cart', item.cart?.id]">{{item.cart?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'item/'+ item.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

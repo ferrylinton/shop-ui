@@ -1,0 +1,58 @@
+
+<div *ngIf="logCart">
+    <h2><span jhiTranslate="shopApp.logCart.detail.title">Log Cart</span> {{logCart.id}}</h2>
+    <hr>
+    <mst-alert-error></mst-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="shopApp.logCart.ip" [ngbTooltip]="'shopApp.logCart.help.ip' | translate">Ip</span></dt>
+        <dd>
+            <span>{{logCart.ip}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logCart.transactionNumber" [ngbTooltip]="'shopApp.logCart.help.transactionNumber' | translate">Transaction Number</span></dt>
+        <dd>
+            <span>{{logCart.transactionNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logCart.cartOperation" [ngbTooltip]="'shopApp.logCart.help.cartOperation' | translate">Cart Operation</span></dt>
+        <dd>
+            <span jhiTranslate="{{'shopApp.CartOperation.' + logCart.cartOperation}}">{{logCart.cartOperation}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logCart.oldData" [ngbTooltip]="'shopApp.logCart.help.oldData' | translate">Old Data</span></dt>
+        <dd>
+            <span>{{logCart.oldData}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logCart.newData" [ngbTooltip]="'shopApp.logCart.help.newData' | translate">New Data</span></dt>
+        <dd>
+            <span>{{logCart.newData}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logCart.createdBy" [ngbTooltip]="'shopApp.logCart.help.createdBy' | translate">Created By</span></dt>
+        <dd>
+            <span>{{logCart.createdBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logCart.createdDate" [ngbTooltip]="'shopApp.logCart.help.createdDate' | translate">Created Date</span></dt>
+        <dd>
+            <span>{{logCart.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logCart.lastModifiedBy" [ngbTooltip]="'shopApp.logCart.help.lastModifiedBy' | translate">Last Modified By</span></dt>
+        <dd>
+            <span>{{logCart.lastModifiedBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logCart.lastModifiedDate" [ngbTooltip]="'shopApp.logCart.help.lastModifiedDate' | translate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{logCart.lastModifiedDate | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'log-cart/'+ logCart.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

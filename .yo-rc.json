@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.ferrylinton.shop",
+      "nativeLanguage": "id"
+    },
+    "jhipsterVersion": "4.14.0",
+    "baseName": "shop",
+    "packageName": "com.ferrylinton.shop",
+    "packageFolder": "com/ferrylinton/shop",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "websocket": true,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSocialSignIn": false,
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "56f8c53a0c32bd0c32e0f80b5543bbac4b45a8e8",
+    "enableTranslation": true,
+    "applicationType": "monolith",
+    "testFrameworks": [],
+    "jhiPrefix": "mst",
+    "nativeLanguage": "id",
+    "languages": [
+      "id",
+      "en"
+    ],
+    "clientPackageManager": "yarn",
+    "skipServer": true,
+    "enableHibernateCache": false,
+    "clientFramework": "angularX",
+    "useSass": true
+  }
+}

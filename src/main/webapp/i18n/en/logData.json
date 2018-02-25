@@ -1,0 +1,41 @@
+
+{
+    "shopApp": {
+        "logData" : {
+            "home": {
+                "title": "Log Data",
+                "createLabel": "Create a new Log Data",
+                "createOrEditLabel": "Create or edit a Log Data"
+            },
+            "created": "A new Log Data is created with identifier {{ param }}",
+            "updated": "A Log Data is updated with identifier {{ param }}",
+            "deleted": "A Log Data is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Log Data {{ id }}?"
+            },
+            "detail": {
+                "title": "Log Data"
+            },
+            "ip": "Ip",
+            "dataType": "Data Type",
+            "dataOperation": "Data Operation",
+            "oldData": "Old Data",
+            "newData": "New Data",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "help": {
+                "ip": "The IP Address",
+                "dataType": "The Data Type",
+                "dataOperation": "The Data Operation",
+                "oldData": "The Old Data",
+                "newData": "The New Data",
+                "createdBy": "Username who inserted data",
+                "createdDate": "The date when data is inserted",
+                "lastModifiedBy": "Username who changed data",
+                "lastModifiedDate": "The date when data is changed"
+            }
+        }
+    }
+}

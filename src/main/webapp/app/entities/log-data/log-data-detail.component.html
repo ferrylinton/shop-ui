@@ -1,0 +1,58 @@
+
+<div *ngIf="logData">
+    <h2><span jhiTranslate="shopApp.logData.detail.title">Log Data</span> {{logData.id}}</h2>
+    <hr>
+    <mst-alert-error></mst-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="shopApp.logData.ip" [ngbTooltip]="'shopApp.logData.help.ip' | translate">Ip</span></dt>
+        <dd>
+            <span>{{logData.ip}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logData.dataType" [ngbTooltip]="'shopApp.logData.help.dataType' | translate">Data Type</span></dt>
+        <dd>
+            <span jhiTranslate="{{'shopApp.DataType.' + logData.dataType}}">{{logData.dataType}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logData.dataOperation" [ngbTooltip]="'shopApp.logData.help.dataOperation' | translate">Data Operation</span></dt>
+        <dd>
+            <span jhiTranslate="{{'shopApp.DataOperation.' + logData.dataOperation}}">{{logData.dataOperation}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logData.oldData" [ngbTooltip]="'shopApp.logData.help.oldData' | translate">Old Data</span></dt>
+        <dd>
+            <span>{{logData.oldData}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logData.newData" [ngbTooltip]="'shopApp.logData.help.newData' | translate">New Data</span></dt>
+        <dd>
+            <span>{{logData.newData}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logData.createdBy" [ngbTooltip]="'shopApp.logData.help.createdBy' | translate">Created By</span></dt>
+        <dd>
+            <span>{{logData.createdBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logData.createdDate" [ngbTooltip]="'shopApp.logData.help.createdDate' | translate">Created Date</span></dt>
+        <dd>
+            <span>{{logData.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logData.lastModifiedBy" [ngbTooltip]="'shopApp.logData.help.lastModifiedBy' | translate">Last Modified By</span></dt>
+        <dd>
+            <span>{{logData.lastModifiedBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.logData.lastModifiedDate" [ngbTooltip]="'shopApp.logData.help.lastModifiedDate' | translate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{logData.lastModifiedDate | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'log-data/'+ logData.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

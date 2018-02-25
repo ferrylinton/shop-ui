@@ -1,0 +1,38 @@
+
+{
+    "shopApp": {
+        "category" : {
+            "home": {
+                "title": "Categories",
+                "createLabel": "Create a new Category",
+                "createOrEditLabel": "Create or edit a Category"
+            },
+            "created": "A new Category is created with identifier {{ param }}",
+            "updated": "A Category is updated with identifier {{ param }}",
+            "deleted": "A Category is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Category"
+            },
+            "name": "Name",
+            "description": "Description",
+            "image": "Image",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "products": "Products",
+            "help": {
+                "name": "The name of the category",
+                "description": "The description of category",
+                "image": "The image of the category",
+                "createdBy": "Username who inserted data",
+                "createdDate": "The date when data is inserted",
+                "lastModifiedBy": "Username who changed data",
+                "lastModifiedDate": "The date when data is changed"
+            }
+        }
+    }
+}

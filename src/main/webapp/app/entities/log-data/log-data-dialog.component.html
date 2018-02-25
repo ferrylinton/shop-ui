@@ -1,0 +1,141 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myLogDataLabel" jhiTranslate="shopApp.logData.home.createOrEditLabel">Create or edit a Log Data</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <mst-alert-error></mst-alert-error>
+        <div class="form-group" [hidden]="!logData.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="logData.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.logData.ip" for="field_ip" [ngbTooltip]="'shopApp.logData.help.ip' | translate">Ip</label>
+            <input type="text" class="form-control" name="ip" id="field_ip"
+                [(ngModel)]="logData.ip" required minlength="5" maxlength="20"/>
+            <div [hidden]="!(editForm.controls.ip?.dirty && editForm.controls.ip?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.ip?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.ip?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 5 }">
+                   This field is required to be at least 5 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.ip?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
+                   This field cannot be longer than 20 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.logData.dataType" for="field_dataType" [ngbTooltip]="'shopApp.logData.help.dataType' | translate">Data Type</label>
+            <select class="form-control" name="dataType" [(ngModel)]="logData.dataType" id="field_dataType"  required>
+                <option value="CATEGORY">{{'shopApp.DataType.CATEGORY' | translate}}</option>
+                <option value="PRODUCT">{{'shopApp.DataType.PRODUCT' | translate}}</option>
+                <option value="AUTHORITY">{{'shopApp.DataType.AUTHORITY' | translate}}</option>
+                <option value="USER">{{'shopApp.DataType.USER' | translate}}</option>
+            </select>
+            <div [hidden]="!(editForm.controls.dataType?.dirty && editForm.controls.dataType?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dataType?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.logData.dataOperation" for="field_dataOperation" [ngbTooltip]="'shopApp.logData.help.dataOperation' | translate">Data Operation</label>
+            <select class="form-control" name="dataOperation" [(ngModel)]="logData.dataOperation" id="field_dataOperation"  required>
+                <option value="ADD">{{'shopApp.DataOperation.ADD' | translate}}</option>
+                <option value="UPDATE">{{'shopApp.DataOperation.UPDATE' | translate}}</option>
+                <option value="DELETE">{{'shopApp.DataOperation.DELETE' | translate}}</option>
+            </select>
+            <div [hidden]="!(editForm.controls.dataOperation?.dirty && editForm.controls.dataOperation?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dataOperation?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.logData.oldData" for="field_oldData" [ngbTooltip]="'shopApp.logData.help.oldData' | translate">Old Data</label>
+            <textarea class="form-control" name="oldData" id="field_oldData"
+                [(ngModel)]="logData.oldData" ></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.logData.newData" for="field_newData" [ngbTooltip]="'shopApp.logData.help.newData' | translate">New Data</label>
+            <textarea class="form-control" name="newData" id="field_newData"
+                [(ngModel)]="logData.newData" ></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.logData.createdBy" for="field_createdBy" [ngbTooltip]="'shopApp.logData.help.createdBy' | translate">Created By</label>
+            <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                [(ngModel)]="logData.createdBy" required minlength="5" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.createdBy?.dirty && editForm.controls.createdBy?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdBy?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdBy?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 5 }">
+                   This field is required to be at least 5 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdBy?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.logData.createdDate" for="field_createdDate" [ngbTooltip]="'shopApp.logData.help.createdDate' | translate">Created Date</label>
+            <div class="d-flex">
+                <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="logData.createdDate"
+                required/>
+            </div>
+            <div [hidden]="!(editForm.controls.createdDate?.dirty && editForm.controls.createdDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdDate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.createdDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.logData.lastModifiedBy" for="field_lastModifiedBy" [ngbTooltip]="'shopApp.logData.help.lastModifiedBy' | translate">Last Modified By</label>
+            <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                [(ngModel)]="logData.lastModifiedBy" minlength="5" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.lastModifiedBy?.dirty && editForm.controls.lastModifiedBy?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lastModifiedBy?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 5 }">
+                   This field is required to be at least 5 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lastModifiedBy?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.logData.lastModifiedDate" for="field_lastModifiedDate" [ngbTooltip]="'shopApp.logData.help.lastModifiedDate' | translate">Last Modified Date</label>
+            <div class="d-flex">
+                <input id="field_lastModifiedDate" type="datetime-local" class="form-control" name="lastModifiedDate" [(ngModel)]="logData.lastModifiedDate"
+                />
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

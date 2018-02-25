@@ -1,0 +1,69 @@
+
+<div *ngIf="product">
+    <h2><span jhiTranslate="shopApp.product.detail.title">Product</span> {{product.id}}</h2>
+    <hr>
+    <mst-alert-error></mst-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="shopApp.product.name" [ngbTooltip]="'shopApp.product.help.name' | translate">Name</span></dt>
+        <dd>
+            <span>{{product.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.product.description" [ngbTooltip]="'shopApp.product.help.description' | translate">Description</span></dt>
+        <dd>
+            <span>{{product.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.product.quantity" [ngbTooltip]="'shopApp.product.help.quantity' | translate">Quantity</span></dt>
+        <dd>
+            <span>{{product.quantity}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.product.price" [ngbTooltip]="'shopApp.product.help.price' | translate">Price</span></dt>
+        <dd>
+            <span>{{product.price}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.product.image" [ngbTooltip]="'shopApp.product.help.image' | translate">Image</span></dt>
+        <dd>
+            <div *ngIf="product.image">
+                <a (click)="openFile(product.imageContentType, product.image)">
+                    <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-width: 100%;" alt="product image"/>
+                </a>
+                {{product.imageContentType}}, {{byteSize(product.image)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="shopApp.product.createdBy" [ngbTooltip]="'shopApp.product.help.createdBy' | translate">Created By</span></dt>
+        <dd>
+            <span>{{product.createdBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.product.createdDate" [ngbTooltip]="'shopApp.product.help.createdDate' | translate">Created Date</span></dt>
+        <dd>
+            <span>{{product.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.product.lastModifiedBy" [ngbTooltip]="'shopApp.product.help.lastModifiedBy' | translate">Last Modified By</span></dt>
+        <dd>
+            <span>{{product.lastModifiedBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.product.lastModifiedDate" [ngbTooltip]="'shopApp.product.help.lastModifiedDate' | translate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{product.lastModifiedDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.product.item">Item</span></dt>
+        <dd>
+            <div *ngIf="product.item">
+                <a [routerLink]="['/item', product.item?.id]">{{product.item?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'product/'+ product.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

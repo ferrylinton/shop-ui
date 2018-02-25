@@ -1,0 +1,10 @@
+{
+    "shopApp": {
+        "CartOperation" : {
+            "null": "",
+            "CHECK_OUT": "CHECK_OUT",
+            "UPDATE": "UPDATE",
+            "CANCEL": "CANCEL"
+        }
+    }
+}

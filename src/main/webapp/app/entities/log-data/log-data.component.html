@@ -1,0 +1,82 @@
+<div>
+    <h2>
+        <span jhiTranslate="shopApp.logData.home.title">Log Data</span>
+        <button class="btn btn-primary float-right jh-create-entity create-log-data" [routerLink]="['/', { outlets: { popup: ['log-data-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="shopApp.logData.home.createLabel">
+            Create new Log Data
+            </span>
+        </button>
+    </h2>
+    <mst-alert></mst-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="logData">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="ip"><span jhiTranslate="shopApp.logData.ip">Ip</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dataType"><span jhiTranslate="shopApp.logData.dataType">Data Type</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dataOperation"><span jhiTranslate="shopApp.logData.dataOperation">Data Operation</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="oldData"><span jhiTranslate="shopApp.logData.oldData">Old Data</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="newData"><span jhiTranslate="shopApp.logData.newData">New Data</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdBy"><span jhiTranslate="shopApp.logData.createdBy">Created By</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdDate"><span jhiTranslate="shopApp.logData.createdDate">Created Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastModifiedBy"><span jhiTranslate="shopApp.logData.lastModifiedBy">Last Modified By</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastModifiedDate"><span jhiTranslate="shopApp.logData.lastModifiedDate">Last Modified Date</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let logData of logData ;trackBy: trackId">
+                <td><a [routerLink]="['../log-data', logData.id ]">{{logData.id}}</a></td>
+                <td>{{logData.ip}}</td>
+                <td jhiTranslate="{{'shopApp.DataType.' + logData.dataType}}">{{logData.dataType}}</td>
+                <td jhiTranslate="{{'shopApp.DataOperation.' + logData.dataOperation}}">{{logData.dataOperation}}</td>
+                <td>{{logData.oldData}}</td>
+                <td>{{logData.newData}}</td>
+                <td>{{logData.createdBy}}</td>
+                <td>{{logData.createdDate | date:'medium'}}</td>
+                <td>{{logData.lastModifiedBy}}</td>
+                <td>{{logData.lastModifiedDate | date:'medium'}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../log-data', logData.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'log-data/'+ logData.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'log-data/'+ logData.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="logData && logData.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

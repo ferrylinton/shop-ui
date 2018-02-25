@@ -1,0 +1,90 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "ip",
+            "javadoc": "The IP Address",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 5,
+            "fieldValidateRulesMaxlength": 20
+        },
+        {
+            "fieldName": "transactionNumber",
+            "javadoc": "Transaction Number",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "cartOperation",
+            "javadoc": "The Cart Operation",
+            "fieldType": "CartOperation",
+            "fieldValues": "CHECK_OUT,UPDATE,CANCEL",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "oldData",
+            "javadoc": "The Old Data",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "newData",
+            "javadoc": "The New Data",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "createdBy",
+            "javadoc": "Username who inserted data",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 5,
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "createdDate",
+            "javadoc": "The date when data is inserted",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "javadoc": "Username who changed data",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 5,
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "javadoc": "The date when data is changed",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180225160901",
+    "javadoc": "Class of Log Cart\n\n@author Ferry L. H.",
+    "entityTableName": "log_cart",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

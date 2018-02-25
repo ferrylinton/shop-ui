@@ -1,0 +1,181 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProductLabel" jhiTranslate="shopApp.product.home.createOrEditLabel">Create or edit a Product</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <mst-alert-error></mst-alert-error>
+        <div class="form-group" [hidden]="!product.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="product.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.product.name" for="field_name" [ngbTooltip]="'shopApp.product.help.name' | translate">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="product.name" required maxlength="100"/>
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                   This field cannot be longer than 100 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.product.description" for="field_description" [ngbTooltip]="'shopApp.product.help.description' | translate">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="product.description" required maxlength="250"/>
+            <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 250 }">
+                   This field cannot be longer than 250 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.product.quantity" for="field_quantity" [ngbTooltip]="'shopApp.product.help.quantity' | translate">Quantity</label>
+            <input type="number" class="form-control" name="quantity" id="field_quantity"
+                [(ngModel)]="product.quantity" required/>
+            <div [hidden]="!(editForm.controls.quantity?.dirty && editForm.controls.quantity?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.quantity?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.quantity?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.product.price" for="field_price" [ngbTooltip]="'shopApp.product.help.price' | translate">Price</label>
+            <input type="number" class="form-control" name="price" id="field_price"
+                [(ngModel)]="product.price" required/>
+            <div [hidden]="!(editForm.controls.price?.dirty && editForm.controls.price?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.price?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.price?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.product.image" for="field_image" [ngbTooltip]="'shopApp.product.help.image' | translate">Image</label>
+            <div>
+                <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-height: 100px;" *ngIf="product.image" alt="product image"/>
+                <div *ngIf="product.image" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{product.imageContentType}}, {{byteSize(product.image)}}</span>
+                    <button type="button" (click)="clearInputImage('image', 'imageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_image" (change)="setFileData($event, product, 'image', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+            </div>
+            <input type="hidden" class="form-control" name="image" id="field_image"
+                [(ngModel)]="product.image" required minbytes="20000" maxbytes="200000"/>
+            <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                [(ngModel)]="product.imageContentType" />
+            <div [hidden]="!(editForm.controls.image?.dirty && editForm.controls.image?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.image?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.image?.errors?.minbytes" jhiTranslate="entity.validation.minbytes" translateValues="{ min: 20000 }">
+                    This field should be at least 20000.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.image?.errors?.maxbytes" jhiTranslate="entity.validation.maxbytes" translateValues="{ max: 200000 }">
+                    This field cannot be more than 200000.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.product.createdBy" for="field_createdBy" [ngbTooltip]="'shopApp.product.help.createdBy' | translate">Created By</label>
+            <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                [(ngModel)]="product.createdBy" required minlength="5" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.createdBy?.dirty && editForm.controls.createdBy?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdBy?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdBy?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 5 }">
+                   This field is required to be at least 5 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdBy?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.product.createdDate" for="field_createdDate" [ngbTooltip]="'shopApp.product.help.createdDate' | translate">Created Date</label>
+            <div class="d-flex">
+                <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="product.createdDate"
+                required/>
+            </div>
+            <div [hidden]="!(editForm.controls.createdDate?.dirty && editForm.controls.createdDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdDate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.createdDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.product.lastModifiedBy" for="field_lastModifiedBy" [ngbTooltip]="'shopApp.product.help.lastModifiedBy' | translate">Last Modified By</label>
+            <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                [(ngModel)]="product.lastModifiedBy" minlength="5" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.lastModifiedBy?.dirty && editForm.controls.lastModifiedBy?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lastModifiedBy?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 5 }">
+                   This field is required to be at least 5 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lastModifiedBy?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.product.lastModifiedDate" for="field_lastModifiedDate" [ngbTooltip]="'shopApp.product.help.lastModifiedDate' | translate">Last Modified Date</label>
+            <div class="d-flex">
+                <input id="field_lastModifiedDate" type="datetime-local" class="form-control" name="lastModifiedDate" [(ngModel)]="product.lastModifiedDate"
+                />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.product.item" for="field_item">Item</label>
+            <select class="form-control" id="field_item" name="item" [(ngModel)]="product.item" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="itemOption.id === product.item?.id ? product.item : itemOption" *ngFor="let itemOption of items; trackBy: trackItemById">{{itemOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

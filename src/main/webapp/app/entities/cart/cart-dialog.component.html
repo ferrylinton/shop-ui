@@ -1,0 +1,94 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCartLabel" jhiTranslate="shopApp.cart.home.createOrEditLabel">Create or edit a Cart</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <mst-alert-error></mst-alert-error>
+        <div class="form-group" [hidden]="!cart.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="cart.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.cart.transactionNumber" for="field_transactionNumber" [ngbTooltip]="'shopApp.cart.help.transactionNumber' | translate">Transaction Number</label>
+            <input type="text" class="form-control" name="transactionNumber" id="field_transactionNumber"
+                [(ngModel)]="cart.transactionNumber" required/>
+            <div [hidden]="!(editForm.controls.transactionNumber?.dirty && editForm.controls.transactionNumber?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.transactionNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.cart.createdBy" for="field_createdBy" [ngbTooltip]="'shopApp.cart.help.createdBy' | translate">Created By</label>
+            <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                [(ngModel)]="cart.createdBy" required minlength="5" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.createdBy?.dirty && editForm.controls.createdBy?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdBy?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdBy?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 5 }">
+                   This field is required to be at least 5 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdBy?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.cart.createdDate" for="field_createdDate" [ngbTooltip]="'shopApp.cart.help.createdDate' | translate">Created Date</label>
+            <div class="d-flex">
+                <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="cart.createdDate"
+                required/>
+            </div>
+            <div [hidden]="!(editForm.controls.createdDate?.dirty && editForm.controls.createdDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdDate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.createdDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.cart.lastModifiedBy" for="field_lastModifiedBy" [ngbTooltip]="'shopApp.cart.help.lastModifiedBy' | translate">Last Modified By</label>
+            <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                [(ngModel)]="cart.lastModifiedBy" minlength="5" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.lastModifiedBy?.dirty && editForm.controls.lastModifiedBy?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lastModifiedBy?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 5 }">
+                   This field is required to be at least 5 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lastModifiedBy?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="shopApp.cart.lastModifiedDate" for="field_lastModifiedDate" [ngbTooltip]="'shopApp.cart.help.lastModifiedDate' | translate">Last Modified Date</label>
+            <div class="d-flex">
+                <input id="field_lastModifiedDate" type="datetime-local" class="form-control" name="lastModifiedDate" [(ngModel)]="cart.lastModifiedDate"
+                />
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

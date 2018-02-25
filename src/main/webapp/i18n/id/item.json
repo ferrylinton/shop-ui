@@ -1,0 +1,27 @@
+
+{
+    "shopApp": {
+        "item" : {
+            "home": {
+                "title": "Items",
+                "createLabel": "Buat Item baru",
+                "createOrEditLabel": "Buat atau edit Item"
+            },
+            "created": "Item dengan id {{ param }} telah dibuat",
+            "updated": "Item dengan id {{ param }} telah diperbaharui",
+            "deleted": "Item dengan id {{ param }} telah dihapus",
+            "delete": {
+                "question": "Apakah anda yakin ingin menghapus Item {{ id }}?"
+            },
+            "detail": {
+                "title": "Item"
+            },
+            "quantity": "Quantity",
+            "products": "Products",
+            "cart": "Cart",
+            "help": {
+                "quantity": "Quantity of cart item"
+            }
+        }
+    }
+}

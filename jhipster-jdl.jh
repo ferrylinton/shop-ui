@@ -1,0 +1,218 @@
+
+
+/**
+ * Enum of Data Type
+ *
+ * @author Ferry L. H.
+ */
+enum DataType{
+	CATEGORY,
+    PRODUCT,
+    AUTHORITY,
+    USER
+}
+
+/**
+ * Enum of Data Operation
+ *
+ * @author Ferry L. H.
+ */
+enum DataOperation{
+	ADD,
+    UPDATE,
+    DELETE
+}
+
+/**
+ * Enum of Cart Operation
+ *
+ * @author Ferry L. H.
+ */
+enum CartOperation{
+	CHECK_OUT,
+    UPDATE,
+    CANCEL
+}
+
+/**
+ * Class of Category
+ *
+ * @author Ferry L. H.
+ */
+entity Category(mst_category) {
+	
+    /** The name of the category */
+	name String required maxlength(100),
+    
+    /** The description of category */
+    description String required maxlength(250),
+    
+    /** The image of the category */
+    image ImageBlob required minbytes(20000) maxbytes(200000),
+    
+    /** Username who inserted data */
+    createdBy String required minlength(5) maxlength(50),
+    
+    /** The date when data is inserted */
+    createdDate Instant required,
+    
+    /** Username who changed data */
+    lastModifiedBy String minlength(5) maxlength(50),
+    
+    /** The date when data is changed */
+    lastModifiedDate Instant
+}
+
+/**
+ * Class of Product
+ *
+ * @author Ferry L. H.
+ */
+entity Product(mst_product) {
+	
+    /** The name of the product */
+    name String required maxlength(100),
+    
+    /** The description of the product */
+    description String required maxlength(250),
+    
+    /** The quantity of products */
+    quantity Integer required,
+    
+    /** The price of product */
+    price BigDecimal required,
+    
+    /** The image of the category */
+    image ImageBlob required minbytes(20000) maxbytes(200000),
+    
+    /** Username who inserted data */
+    createdBy String required minlength(5) maxlength(50),
+    
+    /** The date when data is inserted */
+    createdDate Instant required,
+    
+    /** Username who changed data */
+    lastModifiedBy String minlength(5) maxlength(50),
+    
+    /** The date when data is changed */
+    lastModifiedDate Instant
+}
+
+/**
+ * Class of Cart
+ *
+ * @author Ferry L. H.
+ */
+entity Cart(trx_cart){
+
+	/** Transaction Number */
+	transactionNumber String required,
+    
+    /** Username who inserted data */
+    createdBy String required minlength(5) maxlength(50),
+    
+    /** The date when data is inserted */
+    createdDate Instant required,
+    
+    /** Username who changed data */
+    lastModifiedBy String minlength(5) maxlength(50),
+    
+    /** The date when data is changed */
+    lastModifiedDate Instant
+}
+
+
+
+/**
+ * Class of Item
+ *
+ * @author Ferry L. H.
+ */
+entity Item(trx_item){
+
+	/** Quantity of cart item */
+	quantity Integer required
+}
+
+/**
+ * Class of Log Data
+ *
+ * @author Ferry L. H.
+ */
+entity LogData(log_data){
+
+	/** The IP Address */
+	ip String required minlength(5) maxlength(20),
+    
+    /** The Data Type */
+    dataType DataType required,
+    
+    /** The Data Operation */
+    dataOperation DataOperation required,
+    
+    /** The Old Data */
+    oldData TextBlob,
+    
+    /** The New Data */
+    newData TextBlob,
+    
+    /** Username who inserted data */
+    createdBy String required minlength(5) maxlength(50),
+    
+    /** The date when data is inserted */
+    createdDate Instant required,
+    
+    /** Username who changed data */
+    lastModifiedBy String minlength(5) maxlength(50),
+    
+    /** The date when data is changed */
+    lastModifiedDate Instant
+}
+
+/**
+ * Class of Log Cart
+ *
+ * @author Ferry L. H.
+ */
+entity LogCart(log_cart){
+
+	/** The IP Address */
+	ip String required minlength(5) maxlength(20),
+    
+    /** Transaction Number */
+	transactionNumber String required,
+    
+    /** The Cart Operation */
+    cartOperation CartOperation required,
+    
+    /** The Old Data */
+    oldData TextBlob,
+    
+    /** The New Data */
+    newData TextBlob,
+    
+    /** Username who inserted data */
+    createdBy String required minlength(5) maxlength(50),
+    
+    /** The date when data is inserted */
+    createdDate Instant required,
+    
+    /** Username who changed data */
+    lastModifiedBy String minlength(5) maxlength(50),
+    
+    /** The date when data is changed */
+    lastModifiedDate Instant
+}
+
+relationship ManyToMany {
+	Category{products} to Product{categories}
+}
+
+relationship OneToMany {
+	Item{products} to Product{item},
+    Cart{items} to Item{cart}
+}
+
+service all with serviceImpl
+paginate all with pagination
+

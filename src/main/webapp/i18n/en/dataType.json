@@ -1,0 +1,11 @@
+{
+    "shopApp": {
+        "DataType" : {
+            "null": "",
+            "CATEGORY": "CATEGORY",
+            "PRODUCT": "PRODUCT",
+            "AUTHORITY": "AUTHORITY",
+            "USER": "USER"
+        }
+    }
+}

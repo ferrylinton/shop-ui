@@ -1,0 +1,42 @@
+
+<div *ngIf="cart">
+    <h2><span jhiTranslate="shopApp.cart.detail.title">Cart</span> {{cart.id}}</h2>
+    <hr>
+    <mst-alert-error></mst-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="shopApp.cart.transactionNumber" [ngbTooltip]="'shopApp.cart.help.transactionNumber' | translate">Transaction Number</span></dt>
+        <dd>
+            <span>{{cart.transactionNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.cart.createdBy" [ngbTooltip]="'shopApp.cart.help.createdBy' | translate">Created By</span></dt>
+        <dd>
+            <span>{{cart.createdBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.cart.createdDate" [ngbTooltip]="'shopApp.cart.help.createdDate' | translate">Created Date</span></dt>
+        <dd>
+            <span>{{cart.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.cart.lastModifiedBy" [ngbTooltip]="'shopApp.cart.help.lastModifiedBy' | translate">Last Modified By</span></dt>
+        <dd>
+            <span>{{cart.lastModifiedBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="shopApp.cart.lastModifiedDate" [ngbTooltip]="'shopApp.cart.help.lastModifiedDate' | translate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{cart.lastModifiedDate | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'cart/'+ cart.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

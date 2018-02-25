@@ -1,0 +1,10 @@
+{
+    "shopApp": {
+        "DataOperation" : {
+            "null": "",
+            "ADD": "ADD",
+            "UPDATE": "UPDATE",
+            "DELETE": "DELETE"
+        }
+    }
+}

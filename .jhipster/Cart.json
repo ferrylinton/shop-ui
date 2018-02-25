@@ -1,0 +1,64 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "items",
+            "otherEntityName": "item",
+            "otherEntityRelationshipName": "cart"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "transactionNumber",
+            "javadoc": "Transaction Number",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createdBy",
+            "javadoc": "Username who inserted data",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 5,
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "createdDate",
+            "javadoc": "The date when data is inserted",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "javadoc": "Username who changed data",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 5,
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "javadoc": "The date when data is changed",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180225160858",
+    "javadoc": "Class of Cart\n\n@author Ferry L. H.",
+    "entityTableName": "trx_cart",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}
